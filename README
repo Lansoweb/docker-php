@@ -1,14 +1,7 @@
-PHP docker images
-=================
+PHP 7.0 Apache2
+===============
 
 Tag names following PHP version.
-
-Versions
---------
-
-- 7.0 apache
-- 7.0 cli
-- 7.0 fpm
 
 PHP extensions installed
 ------------------------
