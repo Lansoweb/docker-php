@@ -1,0 +1,37 @@
+PHP 5.6 Apache2
+===============
+
+Tag names following PHP version.
+
+PHP extensions installed
+------------------------
+
+- apcu
+- ctype
+- dom
+- fileinfo
+- gd
+- imagick
+- intl
+- json
+- mbstring
+- mcrypt
+- mssql
+- mysqli
+- oci8
+- opcache
+- pcntl
+- pdo
+- pdo_mysql
+- pdo_pgsql
+- phar
+- simplexml
+- xdebug
+- zip
+
+Extras installed
+----------------
+
+- Composer
+- vim
+

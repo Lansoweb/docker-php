@@ -1,8 +1,8 @@
-FROM php:7.0-cli
+FROM php:5.6-cli
 
 MAINTAINER Leandro Silva <leandro@leandrosilva.info>
 
-COPY ../build/apt-install ../build/docker-php-pecl-install /usr/local/bin/
+COPY ../../build/apt-install ../../build/docker-php-pecl-install /usr/local/bin/
 
 # Include composer
 RUN apt-install 
@@ -27,7 +27,7 @@ RUN curl -sS https://getcomposer.org/installer | php -- \
       --filename=composer
 VOLUME /root/composer/cache
 
-COPY ../build/instantclient-*.zip /tmp/
+COPY ../../build/instantclient-*.zip /tmp/
 RUN unzip /tmp/instantclient-basic-linux.x64-12.1.0.2.0.zip -d /home/ \
     && unzip /tmp/instantclient-sdk-linux.x64-12.1.0.2.0.zip -d /home/ \
     && mv /home/instantclient_12_1 /home/oracle \
@@ -82,4 +82,6 @@ RUN set -x \
 	&& make -j"$(nproc)" \
 	&& make install \
 	&& make clean
+
+RUN a2enmod rewrite
 
