@@ -5,7 +5,7 @@ MAINTAINER Leandro Silva <leandro@leandrosilva.info>
 COPY build/apt-install build/docker-php-pecl-install /usr/local/bin/
 
 # Include composer
-RUN apt-install 
+RUN apt-install \
 	git \
 	zlib1g-dev \
         libfreetype6-dev \
