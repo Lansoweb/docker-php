@@ -1,0 +1,44 @@
+PHP docker images
+=================
+
+Tag names following PHP version.
+
+Versions
+--------
+
+- 7.0 apache
+- 7.0 cli
+- 7.0 fpm
+
+PHP extensions installed
+------------------------
+
+- apcu
+- ctype
+- dom
+- fileinfo
+- gd
+- imagick
+- intl
+- json
+- mbstring
+- mcrypt
+- mssql
+- mysqli
+- oci8
+- opcache
+- pcntl
+- pdo
+- pdo_mysql
+- pdo_pgsql
+- phar
+- simplexml
+- xdebug
+- zip
+
+Extras installed
+----------------
+
+- Composer
+- vim
+
