@@ -83,5 +83,3 @@ RUN set -x \
 	&& make install \
 	&& make clean
 
-RUN a2enmod rewrite
-
