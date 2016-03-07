@@ -59,7 +59,7 @@ RUN docker-php-ext-install \
     && docker-php-ext-install gd \
     && docker-php-ext-configure oci8 --with-oci8=instantclient,/home/oracle \
     && docker-php-ext-install oci8 \
-    && docker-php-pecl-install apcu \
+    && docker-php-pecl-install apcu:4.0.10 \
     && docker-php-pecl-install imagick
 
 RUN printf '[Date]\ndate.timezone=UTC' > /usr/local/etc/php/conf.d/timezone.ini \
