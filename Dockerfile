@@ -84,4 +84,3 @@ RUN set -x \
 	&& make clean
 
 RUN a2enmod rewrite
-
