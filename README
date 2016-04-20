@@ -15,7 +15,6 @@ PHP extensions installed
 - json
 - mbstring
 - mcrypt
-- mssql
 - mysqli
 - oci8
 - opcache
