@@ -11,7 +11,6 @@ PHP extensions installed
 - dom
 - fileinfo
 - gd
-- imagick
 - intl
 - json
 - mbstring
