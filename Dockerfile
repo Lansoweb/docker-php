@@ -18,8 +18,7 @@ RUN apt-install \
     vim \
     libxml2-dev \
     libaio1 \
-    unzip \
-    freetds-dev
+    unzip
 
 ENV COMPOSER_HOME /root/composer
 ENV PATH vendor/bin:$COMPOSER_HOME/vendor/bin:$PATH
@@ -60,9 +59,7 @@ RUN docker-php-ext-install \
     && docker-php-ext-install gd \
     && docker-php-ext-configure oci8 --with-oci8=instantclient,/home/oracle \
     && docker-php-ext-install oci8 \
-    && docker-php-pecl-install apcu \
-    && docker-php-ext-configure mssql --with-libdir=lib/x86_64-linux-gnu \
-    && docker-php-ext-install mssql
+    && docker-php-pecl-install apcu-5.1.3
 
 RUN printf '[Date]\ndate.timezone=UTC' > /usr/local/etc/php/conf.d/timezone.ini \
     && echo "phar.readonly = off" > /usr/local/etc/php/conf.d/phar.ini
