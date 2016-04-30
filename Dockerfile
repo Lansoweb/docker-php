@@ -1,4 +1,4 @@
-FROM php:7.0-apache
+FROM php:7.0.6-apache
 
 MAINTAINER Leandro Silva <leandro@leandrosilva.info>
 
