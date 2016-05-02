@@ -40,6 +40,7 @@ ENV ORACLE_HOME /home/oracle
 # Install useful extensions
 RUN docker-php-ext-install \
     opcache \
+    bcmath \
     ctype \
     dom \
     fileinfo \
