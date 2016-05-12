@@ -6,7 +6,7 @@ Tag names following PHP version.
 PHP extensions installed
 ------------------------
 
-- apcu
+- apcu (and apc)
 - bcmath
 - ctype
 - dom
