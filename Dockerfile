@@ -61,7 +61,7 @@ RUN docker-php-ext-install \
     && docker-php-ext-configure oci8 --with-oci8=instantclient,/home/oracle \
     && docker-php-ext-install oci8
 
-RUN pecl install apcu \
+RUN pecl install apcu-5.1.3 \
     && pecl install apcu_bc-1.0.3 \
     && docker-php-ext-enable apcu --ini-name 10-docker-php-ext-apcu.ini \
     && docker-php-ext-enable apc --ini-name 20-docker-php-ext-apc.ini
