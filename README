@@ -1,11 +1,31 @@
-PHP 5.6.21 Apache2
-==================
+PHP
+===
 
 Tag names following PHP version.
 
-PHP extensions installed
-------------------------
+Branches
+--------
+- 7.0-apache
+- 7.0-cli
+- 7.0-fpm
+- 5.6-apache
+- 5.6-cli
+- 5.6-fpm
 
+To use the latest php version available for a branch, use:
+```
+docker pull leandrosilva/php:7.0-apache
+```
+
+or a specific php version (check the tags):
+```
+docker pull leandrosilva/php:7.0.7-apache
+```
+
+PHP extensions included
+-----------------------
+
+In all versions:
 - apcu
 - ctype
 - dom
@@ -15,7 +35,6 @@ PHP extensions installed
 - json
 - mbstring
 - mcrypt
-- mssql
 - mysqli
 - oci8
 - opcache
@@ -27,6 +46,12 @@ PHP extensions installed
 - simplexml
 - xdebug
 - zip
+
+Only in 7.0 branch:
+- bcmath
+ 
+Only in 5.6 branch:
+- mssql
 
 Extras installed
 ----------------
