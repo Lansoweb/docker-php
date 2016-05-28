@@ -1,7 +1,15 @@
-PHP 5.6.21 CLI
-==============
+PHP
+===
 
 Tag names following PHP version.
+
+PHP "flavors"
+-------------
+
+- php-apache
+- php-cli
+- php-fpm
+- All three for 7.0 and 5.6
 
 PHP extensions installed
 ------------------------
