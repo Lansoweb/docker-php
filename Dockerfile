@@ -1,4 +1,4 @@
-FROM php:5.6-fpm
+FROM php:5.6.22-fpm
 
 MAINTAINER Leandro Silva <leandro@leandrosilva.info>
 
