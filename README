@@ -19,7 +19,7 @@ docker pull leandrosilva/php:7.0-apache
 
 or a specific php version (check the tags):
 ```
-docker pull leandrosilva/php:7.0.7-apache
+docker pull leandrosilva/php:7.0.9-apache
 ```
 
 PHP extensions included
