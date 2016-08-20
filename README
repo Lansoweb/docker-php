@@ -31,6 +31,7 @@ In all versions:
 - dom
 - fileinfo
 - gd
+- gettext
 - intl
 - json
 - mbstring
