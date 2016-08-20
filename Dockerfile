@@ -1,4 +1,4 @@
-FROM php:7.0.9-apache
+FROM php:7.0.10-apache
 
 MAINTAINER Leandro Silva <leandro@leandrosilva.info>
 
@@ -44,6 +44,7 @@ RUN docker-php-ext-install \
     ctype \
     dom \
     fileinfo \
+	gettext \
     intl \
     json \
     mbstring \
@@ -67,7 +68,7 @@ RUN printf '[Date]\ndate.timezone=UTC' > /usr/local/etc/php/conf.d/timezone.ini 
 
 # Setup the Xdebug version to install
 ENV XDEBUG_VERSION 2.4.0
-ENV XDEBUG_MD5 a9bc9c6b9e8bc913fb1f7c6f6d19f6222d430414
+ENV XDEBUG_MD5 52b5cede5dcb815de469d671bfdc626aec8adee3
 
 # Install Xdebug
 RUN set -x \
