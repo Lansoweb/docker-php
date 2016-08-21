@@ -1,41 +1,33 @@
-FROM php:7.0.9-fpm
+FROM php:7.0.10-fpm-alpine
 
 MAINTAINER Leandro Silva <leandro@leandrosilva.info>
 
-COPY build/apt-install build/docker-php-pecl-install /usr/local/bin/
+RUN echo '#!/bin/sh' > /usr/local/bin/apk-install \
+	&& echo 'apk add --update "$@" && rm -rf /var/cache/apk/*' >> /usr/local/bin/apk-install \
+	&& chmod +x /usr/local/bin/apk-install
 
-# Include composer
-RUN apt-install \
+RUN echo 'http://dl-4.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories \
+	&& apk update \
+	&& apk-install \
     git \
-    zlib1g-dev \
-    libfreetype6-dev \
-    libjpeg62-turbo-dev \
+    zlib-dev \
+    freetype-dev \
+    jpeg-dev \
+	libjpeg-turbo-dev \
+	postgresql-dev \
     libmcrypt-dev \
-    libpng12-dev \
-    libpq-dev \
-    zlib1g-dev \
-    libicu-dev \
+    libpng-dev \
+    icu-dev \
     vim \
     libxml2-dev \
-    libaio1 \
-    unzip
+	freetype-dev \
+    unzip \
+	libc6-compat \
+	openssl \
+	gcc \
+	autoconf
 
-ENV COMPOSER_HOME /root/composer
-ENV PATH vendor/bin:$COMPOSER_HOME/vendor/bin:$PATH
-RUN curl -sS https://getcomposer.org/installer | php -- \
-      --install-dir=/usr/local/bin \
-      --filename=composer
-VOLUME /root/composer/cache
-
-COPY build/instantclient-*.zip /tmp/
-RUN unzip /tmp/instantclient-basic-linux.x64-12.1.0.2.0.zip -d /home/ \
-    && unzip /tmp/instantclient-sdk-linux.x64-12.1.0.2.0.zip -d /home/ \
-    && mv /home/instantclient_12_1 /home/oracle \
-    && ln -s /home/oracle/libclntsh.so.12.1 /home/oracle/libclntsh.so \
-    && ln -s /home/oracle/libclntshcore.so.12.1 /home/oracle/libclntshcore.so \
-    && ln -s /home/oracle/libocci.so.12.1 /home/oracle/libocci.so \
-    && rm -rf /tmp/instantclient-*.zip
-ENV ORACLE_HOME /home/oracle
+RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
 
 # Install useful extensions
 RUN docker-php-ext-install \
@@ -44,9 +36,10 @@ RUN docker-php-ext-install \
     ctype \
     dom \
     fileinfo \
+	gd \
+	gettext \
     intl \
     json \
-    mbstring \
     mcrypt \
     mysqli \
     pcntl \
@@ -55,13 +48,13 @@ RUN docker-php-ext-install \
     pdo_pgsql \
     phar \
     simplexml \
-    zip \
-    && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
-    && docker-php-ext-install gd \
-    && docker-php-ext-configure oci8 --with-oci8=instantclient,/home/oracle \
-    && docker-php-ext-install oci8
+    zip
 
-RUN pecl install apcu-5.1.3 \
+RUN set -xe \
+	&& apk-install \
+	g++ \
+	make \
+	&& pecl install apcu-5.1.3 \
     && pecl install apcu_bc-1.0.3 \
     && docker-php-ext-enable apcu --ini-name 10-docker-php-ext-apcu.ini \
     && docker-php-ext-enable apc --ini-name 20-docker-php-ext-apc.ini
@@ -70,8 +63,8 @@ RUN printf '[Date]\ndate.timezone=UTC' > /usr/local/etc/php/conf.d/timezone.ini 
     && echo "phar.readonly = off" > /usr/local/etc/php/conf.d/phar.ini
 
 # Setup the Xdebug version to install
-ENV XDEBUG_VERSION 2.4.0
-ENV XDEBUG_MD5 a9bc9c6b9e8bc913fb1f7c6f6d19f6222d430414
+ENV XDEBUG_VERSION 2.4.1
+ENV XDEBUG_MD5 52b5cede5dcb815de469d671bfdc626aec8adee3
 
 # Install Xdebug
 RUN set -x \
@@ -87,3 +80,11 @@ RUN set -x \
     && make install \
     && make clean
 
+
+# Include composer
+ENV COMPOSER_HOME /root/composer
+ENV PATH vendor/bin:$COMPOSER_HOME/vendor/bin:$PATH
+RUN curl -sS https://getcomposer.org/installer | php -- \
+      --install-dir=/usr/local/bin \
+      --filename=composer
+VOLUME /root/composer/cache
