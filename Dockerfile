@@ -3,29 +3,29 @@ FROM php:7.0.10-fpm-alpine
 MAINTAINER Leandro Silva <leandro@leandrosilva.info>
 
 RUN echo '#!/bin/sh' > /usr/local/bin/apk-install \
-	&& echo 'apk add --update "$@" && rm -rf /var/cache/apk/*' >> /usr/local/bin/apk-install \
-	&& chmod +x /usr/local/bin/apk-install
+    && echo 'apk add --update "$@" && rm -rf /var/cache/apk/*' >> /usr/local/bin/apk-install \
+    && chmod +x /usr/local/bin/apk-install
 
 RUN echo 'http://dl-4.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories \
-	&& apk update \
-	&& apk-install \
+    && apk update \
+    && apk-install \
     git \
     zlib-dev \
     freetype-dev \
     jpeg-dev \
-	libjpeg-turbo-dev \
-	postgresql-dev \
+    libjpeg-turbo-dev \
+    postgresql-dev \
     libmcrypt-dev \
     libpng-dev \
     icu-dev \
     vim \
     libxml2-dev \
-	freetype-dev \
+    freetype-dev \
     unzip \
-	libc6-compat \
-	openssl \
-	gcc \
-	autoconf
+    libc6-compat \
+    openssl \
+    gcc \
+    autoconf
 
 RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
 
@@ -36,8 +36,8 @@ RUN docker-php-ext-install \
     ctype \
     dom \
     fileinfo \
-	gd \
-	gettext \
+    gd \
+    gettext \
     intl \
     json \
     mcrypt \
@@ -51,10 +51,10 @@ RUN docker-php-ext-install \
     zip
 
 RUN set -xe \
-	&& apk-install \
-	g++ \
-	make \
-	&& pecl install apcu-5.1.3 \
+    && apk-install \
+    g++ \
+    make \
+    && pecl install apcu-5.1.3 \
     && pecl install apcu_bc-1.0.3 \
     && docker-php-ext-enable apcu --ini-name 10-docker-php-ext-apcu.ini \
     && docker-php-ext-enable apc --ini-name 20-docker-php-ext-apc.ini
@@ -79,7 +79,6 @@ RUN set -x \
     && make -j"$(nproc)" \
     && make install \
     && make clean
-
 
 # Include composer
 ENV COMPOSER_HOME /root/composer
