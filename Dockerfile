@@ -60,8 +60,12 @@ RUN docker-php-ext-install \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-install gd \
     && docker-php-ext-configure oci8 --with-oci8=instantclient,/home/oracle \
-    && docker-php-ext-install oci8 \
-    && docker-php-pecl-install apcu-5.1.3
+    && docker-php-ext-install oci8
+
+RUN pecl install apcu-5.1.3 \
+    && pecl install apcu_bc-1.0.3 \
+    && docker-php-ext-enable apcu --ini-name 10-docker-php-ext-apcu.ini \
+    && docker-php-ext-enable apc --ini-name 20-docker-php-ext-apc.ini
 
 RUN printf '[Date]\ndate.timezone=UTC' > /usr/local/etc/php/conf.d/timezone.ini \
     && echo "phar.readonly = off" > /usr/local/etc/php/conf.d/phar.ini
