@@ -5,6 +5,10 @@ Tag names following PHP version.
 
 Branches
 --------
+- 7.1-apache
+- 7.1-cli
+- 7.1-fpm
+- 7.1-fpm-alpine
 - 7.0-apache
 - 7.0-cli
 - 7.0-fpm
@@ -37,7 +41,6 @@ In all versions:
 - mbstring
 - mcrypt
 - mysqli
-- oci8
 - opcache
 - pcntl
 - pdo
@@ -47,6 +50,9 @@ In all versions:
 - simplexml
 - xdebug
 - zip
+
+In 5.6 and 7.0 branches:
+- oci8
 
 Only in 7.0 branch:
 - bcmath
@@ -59,6 +65,6 @@ Alpine branch does not have oci8 extension yet.
 Extras installed
 ----------------
 
-- Composer
+- composer
 - vim
 
