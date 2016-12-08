@@ -25,7 +25,9 @@ RUN echo 'http://dl-4.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositor
     libc6-compat \
     openssl \
     gcc \
-    autoconf
+    autoconf \
+    libintl \
+    gettext-dev
 
 RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
 
