@@ -5,6 +5,10 @@ Tag names following PHP version.
 
 Branches
 --------
+- 7.1-apache
+- 7.1-cli
+- 7.1-fpm
+- 7.1-fpm-alpine
 - 7.0-apache
 - 7.0-cli
 - 7.0-fpm
@@ -38,7 +42,6 @@ In all versions:
 - mbstring
 - mcrypt
 - mysqli
-- oci8
 - opcache
 - pcntl
 - pdo
@@ -55,9 +58,29 @@ Only in 7.0 branch:
 Only in 5.6 branch:
 - mssql
 
+In 5.6 and 7.0 branches:
+- oci8
+
+Alpine branch does not have oci8 extension yet.
+
+Stating with 7.1.0, the oci8 is removed for being too big. If you need oci8 extension, please use a Dockerfile like:
+
+FROM leandrosilva/7.1-apache
+COPY build/instantclient-*.zip /tmp/
+RUN unzip /tmp/instantclient-basic-linux.x64-12.1.0.2.0.zip -d /home/ \
+    && unzip /tmp/instantclient-sdk-linux.x64-12.1.0.2.0.zip -d /home/ \
+    && mv /home/instantclient_12_1 /home/oracle \
+    && ln -s /home/oracle/libclntsh.so.12.1 /home/oracle/libclntsh.so \
+    && ln -s /home/oracle/libclntshcore.so.12.1 /home/oracle/libclntshcore.so \
+    && ln -s /home/oracle/libocci.so.12.1 /home/oracle/libocci.so \
+    && rm -rf /tmp/instantclient-*.zip
+ENV ORACLE_HOME /home/oracle
+RUN docker-php-ext-configure oci8 --with-oci8=instantclient,/home/oracle \
+    && docker-php-ext-install oci8
+
 Extras installed
 ----------------
 
-- Composer
+- composer
 - vim
 
