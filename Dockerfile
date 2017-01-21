@@ -1,4 +1,4 @@
-FROM php:7.0.13-fpm
+FROM php:7.0.14-fpm
 
 MAINTAINER Leandro Silva <leandro@leandrosilva.info>
 
@@ -44,7 +44,7 @@ RUN docker-php-ext-install \
     ctype \
     dom \
     fileinfo \
-	gettext \
+    gettext \
     intl \
     json \
     mbstring \
@@ -71,8 +71,8 @@ RUN printf '[Date]\ndate.timezone=UTC' > /usr/local/etc/php/conf.d/timezone.ini 
     && echo "phar.readonly = off" > /usr/local/etc/php/conf.d/phar.ini
 
 # Setup the Xdebug version to install
-ENV XDEBUG_VERSION 2.4.1
-ENV XDEBUG_MD5 52b5cede5dcb815de469d671bfdc626aec8adee3
+ENV XDEBUG_VERSION 2.5.0
+ENV XDEBUG_MD5 0d31602a6ee2ba6d2e18a6db79bdb9a2a706bcd9
 
 # Install Xdebug
 RUN set -x \
