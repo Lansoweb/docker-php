@@ -18,6 +18,7 @@ RUN echo 'http://dl-4.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositor
     libmcrypt-dev \
     libpng-dev \
     icu-dev \
+    gettext-dev \
     vim \
     libxml2-dev \
     freetype-dev \
