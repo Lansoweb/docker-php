@@ -1,4 +1,4 @@
-FROM php:7.1.1-apache
+FROM php:7.1.4-apache
 
 MAINTAINER Leandro Silva <leandro@leandrosilva.info>
 
@@ -71,8 +71,8 @@ RUN printf '[Date]\ndate.timezone=UTC' > /usr/local/etc/php/conf.d/timezone.ini 
     && echo "phar.readonly = off" > /usr/local/etc/php/conf.d/phar.ini
 
 # Setup the Xdebug version to install
-ENV XDEBUG_VERSION 2.5.0
-ENV XDEBUG_MD5 0d31602a6ee2ba6d2e18a6db79bdb9a2a706bcd9
+ENV XDEBUG_VERSION 2.5.3
+ENV XDEBUG_MD5 4cce3d495243e92cd2e1d764a33188d60c85f0d2087d94d4203c354ea03530f4
 
 # Install Xdebug
 RUN set -x \
