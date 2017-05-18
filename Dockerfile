@@ -1,4 +1,4 @@
-FROM php:7.0.18-cli
+FROM php:7.0.19-cli
 
 MAINTAINER Leandro Silva <leandro@leandrosilva.info>
 
@@ -67,12 +67,14 @@ RUN pecl install apcu-5.1.3 \
     && docker-php-ext-enable apcu --ini-name 10-docker-php-ext-apcu.ini \
     && docker-php-ext-enable apc --ini-name 20-docker-php-ext-apc.ini
 
+RUN docker-php-pecl-install mongodb
+
 RUN printf '[Date]\ndate.timezone=UTC' > /usr/local/etc/php/conf.d/timezone.ini \
     && echo "phar.readonly = off" > /usr/local/etc/php/conf.d/phar.ini
 
 # Setup the Xdebug version to install
-ENV XDEBUG_VERSION 2.5.3
-ENV XDEBUG_MD5 4cce3d495243e92cd2e1d764a33188d60c85f0d2087d94d4203c354ea03530f4
+ENV XDEBUG_VERSION 2.5.4
+ENV XDEBUG_MD5 300ca6fc3d95025148b0b5d0c96e14e54299e536a93a5d68c67b2cf32c9432b8
 
 # Install Xdebug
 RUN set -x \
