@@ -27,16 +27,6 @@ RUN curl -sS https://getcomposer.org/installer | php -- \
       --filename=composer
 VOLUME /root/composer/cache
 
-COPY build/instantclient-*.zip /tmp/
-RUN unzip /tmp/instantclient-basic-linux.x64-12.1.0.2.0.zip -d /home/ \
-    && unzip /tmp/instantclient-sdk-linux.x64-12.1.0.2.0.zip -d /home/ \
-    && mv /home/instantclient_12_1 /home/oracle \
-    && ln -s /home/oracle/libclntsh.so.12.1 /home/oracle/libclntsh.so \
-    && ln -s /home/oracle/libclntshcore.so.12.1 /home/oracle/libclntshcore.so \
-    && ln -s /home/oracle/libocci.so.12.1 /home/oracle/libocci.so \
-    && rm -rf /tmp/instantclient-*.zip
-ENV ORACLE_HOME /home/oracle
-
 # Install useful extensions
 RUN docker-php-ext-install \
     opcache \
@@ -58,9 +48,7 @@ RUN docker-php-ext-install \
     simplexml \
     zip \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
-    && docker-php-ext-install gd \
-    && docker-php-ext-configure oci8 --with-oci8=instantclient,/home/oracle \
-    && docker-php-ext-install oci8
+    && docker-php-ext-install gd
 
 RUN docker-php-pecl-install mongodb
 
