@@ -1,4 +1,4 @@
-FROM php:7.1.4-apache
+FROM php:7.1.5-apache
 
 MAINTAINER Leandro Silva <leandro@leandrosilva.info>
 
@@ -62,6 +62,8 @@ RUN docker-php-ext-install \
     && docker-php-ext-configure oci8 --with-oci8=instantclient,/home/oracle \
     && docker-php-ext-install oci8
 
+RUN docker-php-pecl-install mongodb
+
 RUN pecl install apcu-5.1.3 \
     && pecl install apcu_bc-1.0.3 \
     && docker-php-ext-enable apcu --ini-name 10-docker-php-ext-apcu.ini \
@@ -71,8 +73,8 @@ RUN printf '[Date]\ndate.timezone=UTC' > /usr/local/etc/php/conf.d/timezone.ini 
     && echo "phar.readonly = off" > /usr/local/etc/php/conf.d/phar.ini
 
 # Setup the Xdebug version to install
-ENV XDEBUG_VERSION 2.5.3
-ENV XDEBUG_MD5 4cce3d495243e92cd2e1d764a33188d60c85f0d2087d94d4203c354ea03530f4
+ENV XDEBUG_VERSION 2.5.4
+ENV XDEBUG_MD5 300ca6fc3d95025148b0b5d0c96e14e54299e536a93a5d68c67b2cf32c9432b8
 
 # Install Xdebug
 RUN set -x \
