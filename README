@@ -41,6 +41,7 @@ In all versions:
 - json
 - mbstring
 - mcrypt
+- mongodb
 - mysqli
 - opcache
 - pcntl
@@ -55,7 +56,7 @@ In all versions:
 In 5.6 and 7.0 branches:
 - oci8
 
-Only in 7.0 branch:
+Only in 7+ branch:
 - bcmath
  
 Only in 5.6 branch:
