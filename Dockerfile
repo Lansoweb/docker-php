@@ -1,4 +1,4 @@
-FROM php:7.1.4-fpm
+FROM php:7.1.5-fpm
 
 MAINTAINER Leandro Silva <leandro@leandrosilva.info>
 
@@ -27,16 +27,6 @@ RUN curl -sS https://getcomposer.org/installer | php -- \
       --filename=composer
 VOLUME /root/composer/cache
 
-COPY build/instantclient-*.zip /tmp/
-RUN unzip /tmp/instantclient-basic-linux.x64-12.1.0.2.0.zip -d /home/ \
-    && unzip /tmp/instantclient-sdk-linux.x64-12.1.0.2.0.zip -d /home/ \
-    && mv /home/instantclient_12_1 /home/oracle \
-    && ln -s /home/oracle/libclntsh.so.12.1 /home/oracle/libclntsh.so \
-    && ln -s /home/oracle/libclntshcore.so.12.1 /home/oracle/libclntshcore.so \
-    && ln -s /home/oracle/libocci.so.12.1 /home/oracle/libocci.so \
-    && rm -rf /tmp/instantclient-*.zip
-ENV ORACLE_HOME /home/oracle
-
 # Install useful extensions
 RUN docker-php-ext-install \
     opcache \
@@ -58,9 +48,9 @@ RUN docker-php-ext-install \
     simplexml \
     zip \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
-    && docker-php-ext-install gd \
-    && docker-php-ext-configure oci8 --with-oci8=instantclient,/home/oracle \
-    && docker-php-ext-install oci8
+    && docker-php-ext-install gd
+
+RUN docker-php-pecl-install mongodb
 
 RUN pecl install apcu-5.1.3 \
     && pecl install apcu_bc-1.0.3 \
@@ -71,8 +61,8 @@ RUN printf '[Date]\ndate.timezone=UTC' > /usr/local/etc/php/conf.d/timezone.ini 
     && echo "phar.readonly = off" > /usr/local/etc/php/conf.d/phar.ini
 
 # Setup the Xdebug version to install
-ENV XDEBUG_VERSION 2.5.3
-ENV XDEBUG_MD5 4cce3d495243e92cd2e1d764a33188d60c85f0d2087d94d4203c354ea03530f4
+ENV XDEBUG_VERSION 2.5.4
+ENV XDEBUG_MD5 300ca6fc3d95025148b0b5d0c96e14e54299e536a93a5d68c67b2cf32c9432b8
 
 # Install Xdebug
 RUN set -x \
