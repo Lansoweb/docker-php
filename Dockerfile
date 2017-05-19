@@ -26,7 +26,8 @@ RUN echo 'http://dl-4.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositor
     libc6-compat \
     openssl \
     gcc \
-    autoconf
+    autoconf \
+    pcre-dev
 
 RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
 
@@ -55,12 +56,13 @@ RUN set -xe \
     && apk-install \
     g++ \
     make \
-    && pecl install apcu-5.1.3 \
+    && pecl install apcu-5.1.8 \
     && pecl install apcu_bc-1.0.3 \
     && docker-php-ext-enable apcu --ini-name 10-docker-php-ext-apcu.ini \
     && docker-php-ext-enable apc --ini-name 20-docker-php-ext-apc.ini
 
-RUN docker-php-pecl-install mongodb
+RUN pecl install mongodb \
+    && docker-php-ext-enable mongodb
 
 RUN printf '[Date]\ndate.timezone=UTC' > /usr/local/etc/php/conf.d/timezone.ini \
     && echo "phar.readonly = off" > /usr/local/etc/php/conf.d/phar.ini
