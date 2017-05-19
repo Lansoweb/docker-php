@@ -62,7 +62,8 @@ RUN set -xe \
     && docker-php-ext-enable apcu --ini-name 10-docker-php-ext-apcu.ini \
     && docker-php-ext-enable apc --ini-name 20-docker-php-ext-apc.ini
 
-RUN docker-php-pecl-install mongodb
+RUN pecl install mongodb \
+    && docker-php-ext-enable mongodb
 
 RUN printf '[Date]\ndate.timezone=UTC' > /usr/local/etc/php/conf.d/timezone.ini \
     && echo "phar.readonly = off" > /usr/local/etc/php/conf.d/phar.ini
