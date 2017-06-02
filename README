@@ -49,6 +49,7 @@ In all versions:
 - pdo_mysql
 - pdo_pgsql
 - phar
+- redis
 - simplexml
 - xdebug
 - zip
