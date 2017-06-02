@@ -22,11 +22,6 @@ To use the latest php version available for a branch, use:
 docker pull leandrosilva/php:7.0-apache
 ```
 
-or a specific php version (check the tags):
-```
-docker pull leandrosilva/php:7.0.10-apache
-```
-
 PHP extensions included
 -----------------------
 
@@ -48,17 +43,16 @@ In all versions:
 - pdo_mysql
 - pdo_pgsql
 - phar
+- redis
 - simplexml
 - xdebug
 - zip
 
-Only in 7.0 branch:
+Only in 7+ branch:
 - bcmath
  
 Only in 5.6 branch:
 - mssql
-
-In 5.6 and 7.0 branches:
 - oci8
 
 Alpine branch does not have oci8 extension yet.
