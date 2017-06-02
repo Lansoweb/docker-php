@@ -22,11 +22,6 @@ To use the latest php version available for a branch, use:
 docker pull leandrosilva/php:7.0-apache
 ```
 
-or a specific php version (check the tags):
-```
-docker pull leandrosilva/php:7.0.10-apache
-```
-
 PHP extensions included
 -----------------------
 
@@ -48,24 +43,24 @@ In all versions:
 - pdo_mysql
 - pdo_pgsql
 - phar
+- redis
 - simplexml
 - xdebug
 - zip
 
-Only in 7.0 branch:
+Only in 7+ branch:
 - bcmath
  
 Only in 5.6 branch:
 - mssql
-
-In 5.6 and 7.0 branches:
 - oci8
 
 Alpine branch does not have oci8 extension yet.
 
-Stating with 7.1.0, the oci8 is removed for being too big. If you need oci8 extension, please use a Dockerfile like:
-
-FROM leandrosilva/7.1-apache
+Stating with 7.1.0, the oci8 is removed for being too big. 
+If you need oci8 extension, please use a Dockerfile like (changing to the desired branch):
+```
+FROM leandrosilva/php:7.1-fpm-alpine
 COPY build/instantclient-*.zip /tmp/
 RUN unzip /tmp/instantclient-basic-linux.x64-12.1.0.2.0.zip -d /home/ \
     && unzip /tmp/instantclient-sdk-linux.x64-12.1.0.2.0.zip -d /home/ \
@@ -77,6 +72,7 @@ RUN unzip /tmp/instantclient-basic-linux.x64-12.1.0.2.0.zip -d /home/ \
 ENV ORACLE_HOME /home/oracle
 RUN docker-php-ext-configure oci8 --with-oci8=instantclient,/home/oracle \
     && docker-php-ext-install oci8
+```
 
 Extras installed
 ----------------
