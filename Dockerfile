@@ -50,7 +50,7 @@ RUN docker-php-ext-install \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-install gd
 
-RUN docker-php-pecl-install mongodb
+RUN docker-php-pecl-install mongodb redis
 
 RUN pecl install apcu-5.1.3 \
     && pecl install apcu_bc-1.0.3 \
