@@ -1,0 +1,7 @@
+#!/bin/bash
+docker build --quiet \
+		--build-arg VERSION=$CACHE_TAG \
+		--label org.label-schema.build-date=$(date -u "+%Y-%m-%dT%H:%M:%SZ") \
+		--label org.label-schema.vcs-ref=$SOURCE_COMMIT \
+		--tag $IMAGE_NAME \
+		.
