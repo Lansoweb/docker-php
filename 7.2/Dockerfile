@@ -22,6 +22,8 @@ RUN buildDeps=" \
         libpng-dev \
         libpq-dev \
         libxml2-dev \
+        unzip \
+        vim \
     " \
     && apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y $buildDeps $runtimeDeps \
     && docker-php-ext-install bcmath bz2 calendar fileinfo gettext iconv intl json mbstring mysqli pcntl opcache pdo_mysql pdo_pgsql pgsql soap simplexml zip \
@@ -31,6 +33,8 @@ RUN buildDeps=" \
     && docker-php-ext-enable apcu.so memcached.so mongodb.so redis.so \
     && apt-get purge -y --auto-remove $buildDeps \
     && rm -r /var/lib/apt/lists/*
+
+COPY ../config/prod.ini /usr/local/etc/php/conf.d/env.ini
 
 # Install Composer.
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
