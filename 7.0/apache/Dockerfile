@@ -36,7 +36,7 @@ RUN buildDeps=" \
     && apt-get purge -y --auto-remove $buildDeps \
     && rm -r /var/lib/apt/lists/*
 
-COPY config/prod.ini /usr/local/etc/php/conf.d/env.ini
+COPY conf/prod.ini /usr/local/etc/php/conf.d/env.ini
 
 # Install Composer.
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \

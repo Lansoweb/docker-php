@@ -4,7 +4,7 @@ LABEL org.label-schema.schema-version="1.0" \
     org.label-schema.vcs-url="https://github.com/Lansoweb/docker-php" \
     org.label-schema.vendor="Lansoweb"
 
-COPY config/dev.ini /usr/local/etc/php/conf.d/env.ini
+COPY conf/dev.ini /usr/local/etc/php/conf.d/env.ini
 
 # Install XDebug.
 RUN pecl install xdebug \
